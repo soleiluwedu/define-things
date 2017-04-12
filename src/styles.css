@@ -9,7 +9,7 @@ body {
   text-align: center;
 }
 
-#articulation {
+#art {
   display: flex;
   flex-direction: column;
 }
@@ -20,44 +20,41 @@ body {
   justify-content: center;
 }
 
-#rearticulate {
+#art_input {
+  background-color: #001530;
+  border: 1px solid lightskyblue;
+  border-radius: 4px;
+  color: lightcoral;
   display: flex;
+  font-family: Arial;
+  font-size: 20px;
   justify-content: center;
+  outline: none;
+  padding: 4px;
+  text-align: center;
+  width: 90%;
 }
 
-.definition, .subsense {
+.def, .sub {
   background-color: black;
   border-radius: 4px;
   font-family: Arial;
   font-size: 12px;
 }
 
-.definition {
+.def {
   color: steelblue
 }
 
-.definition_label {
+.def_label {
   color: lightseagreen;
 }
 
-.subsense {
+.sub {
   color: steelblue;
   padding-left: 40px;
 }
 
-.subsense_label {
+.sub_label {
   color: lightseagreen
-}
-
-input {
-  background-color: #001530;
-  border: 1px solid lightskyblue;
-  border-radius: 4px;
-  color: lightcoral;
-  font-family: Arial;
-  font-size: 20px;
-  outline: none;
-  padding: 4px;
-  text-align: center;
-  width: 90%;
 }

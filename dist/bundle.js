@@ -9996,7 +9996,7 @@ module.exports = getIteratorFn;
 // Has input field to alter sentence.
 const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   "div",
-  { id: "articulation" },
+  { id: "art" },
   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     "div",
     { id: "sentence" },
@@ -10008,12 +10008,8 @@ const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.crea
   ),
   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     "div",
-    { id: "rearticulate" },
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-      onChange: e => props.onchange(e),
-      onKeyDown: e => props.onkeydown(e),
-      type: "text"
-    })
+    { id: "art_input" },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { onChange: e => props.onchange(e), onKeyDown: e => props.onkeydown(e), type: "text" })
   )
 );
 
@@ -10064,17 +10060,10 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'h1',
         { id: 'title' },
-        'Thai\'s Introspective Problem-Solving'
+        'Define Things'
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__articulation_jsx__["a" /* default */], {
-        onchange: this.art_onchange.bind(this),
-        onkeydown: this.art_onkeydown.bind(this),
-        sentence: this.state.art
-      }),
-      this.state.topics.map((topic, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__topic_jsx__["a" /* default */], {
-        key: topic,
-        topic: topic
-      }))
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__articulation_jsx__["a" /* default */], { onchange: this.art_onchange.bind(this), onkeydown: this.art_onkeydown.bind(this), sentence: this.state.art }),
+      this.state.topics.map(t => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__topic_jsx__["a" /* default */], { key: t, topic: t }))
     );
   }
 }
@@ -22064,21 +22053,18 @@ module.exports = traverseAllChildren;
 // Shows definitions and subsenses of words.
 const Definition = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   'div',
-  { className: 'definition' },
+  { className: 'def' },
   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'p',
     null,
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'span',
-      { className: 'definition_label' },
+      { className: 'def_label' },
       !props.defObj.def ? '' : 'Definition: '
     ),
     props.defObj.def
   ),
-  !props.defObj.sub ? '' : props.defObj.sub.map((sub, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__subsense_jsx__["a" /* default */], {
-    key: `${props.propkey}-${i}`,
-    subsense: sub
-  }))
+  !props.defObj.sub ? '' : props.defObj.sub.map((s, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__subsense_jsx__["a" /* default */], { key: `${props.propkey}-${i}`, subsense: s }))
 );
 
 /* harmony default export */ __webpack_exports__["a"] = (Definition);
@@ -22096,13 +22082,13 @@ const Definition = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.create
 // Shows subsenses of words.
 const Subsense = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   "div",
-  { className: "subsense" },
+  { className: "sub" },
   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     "p",
     null,
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       "span",
-      { className: "subsense_label" },
+      { className: "sub_label" },
       "Subsense: "
     ),
     props.subsense
@@ -22151,23 +22137,17 @@ class Topic extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
 
   // Render topic and children topics.
   render() {
+    const topic = this.state.topic; // For the sake of brevity.
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       { className: 'topic' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'p',
         null,
-        this.state.topic
+        topic
       ),
-      this.state.defs.map((defObj, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__definition_jsx__["a" /* default */], {
-        defObj: defObj,
-        key: `${this.state.topic}-Def-${i}`,
-        propkey: `${this.state.topic}-Def-${i}`
-      })),
-      this.state.kids.map((topic, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Topic, {
-        key: topic,
-        topic: topic
-      }))
+      this.state.defs.map((d, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__definition_jsx__["a" /* default */], { defObj: d, key: `${topic}-Def-${i}`, propkey: `${topic}-Def-${i}` })),
+      this.state.kids.map(t => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Topic, { key: t, topic: t }))
     );
   }
 }

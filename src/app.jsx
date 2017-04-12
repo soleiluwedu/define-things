@@ -26,20 +26,9 @@ class App extends Component {
   render() {
     return (
       <div id="app">
-        <h1 id="title">Thai's Introspective Problem-Solving</h1>
-        <Articulation
-          onchange={this.art_onchange.bind(this)}
-          onkeydown={this.art_onkeydown.bind(this)}
-          sentence={this.state.art}
-        />
-        {
-          this.state.topics.map((topic, i) => (
-            <Topic
-              key={topic}
-              topic={topic}
-            />
-          ))
-        }
+        <h1 id="title">Define Things</h1>
+        <Articulation onchange={this.art_onchange.bind(this)} onkeydown={this.art_onkeydown.bind(this)} sentence={this.state.art} />
+        {this.state.topics.map(t => <Topic key={t} topic={t} />)}
       </div>
     )
   }

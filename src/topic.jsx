@@ -29,26 +29,12 @@ class Topic extends Component {
 
   // Render topic and children topics.
   render() {
+    const topic = this.state.topic; // For the sake of brevity.
     return (
       <div className="topic">
-        <p>{this.state.topic}</p>
-        {
-          this.state.defs.map((defObj, i) => (
-            <Definition
-              defObj={defObj}
-              key={`${this.state.topic}-Def-${i}`}
-              propkey={`${this.state.topic}-Def-${i}`}
-            />
-          ))
-        }
-        {
-          this.state.kids.map((topic, i) => (
-            <Topic
-              key={topic}
-              topic={topic}
-            />
-          ))
-        }
+        <p>{topic}</p>
+        {this.state.defs.map((d, i) => <Definition defObj={d} key={`${topic}-Def-${i}`} propkey={`${topic}-Def-${i}`} />)}
+        {this.state.kids.map(t => <Topic key={t} topic={t} />)}
       </div>
     )
   }
