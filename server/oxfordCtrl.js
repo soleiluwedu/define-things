@@ -49,8 +49,8 @@ function oxfordCtrl(req, res, next) {
         // Navigating Oxford API's response object.
         const definitions = fullData.results[0].lexicalEntries[0].entries[0].senses.map(obj => {
           const returnObj = {};
-          if (obj.definitions) returnObj.definition = obj.definitions[0];
-          if (obj.subsenses) returnObj.subsenses = obj.subsenses.map(subObj => subObj.definitions[0]);
+          if (obj.definitions) returnObj.def = obj.definitions[0];
+          if (obj.subsenses) returnObj.sub = obj.subsenses.map(subObj => subObj.definitions[0]);
           return returnObj;
         });
 
@@ -58,7 +58,7 @@ function oxfordCtrl(req, res, next) {
         res.send(definitions);
       }
 
-      // Move to next middleware even after sending response to client.
+      // Move to next middleware even after sending response to client for server-side logging purposes.
       return next();
     });
   });

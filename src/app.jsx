@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Articulation from './articulation.jsx';
-import TopicNode from './topicnode.jsx';
+import Topic from './topic.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      articulation: '', // Articulation of success conditions.
-      topicnodes: []         // Key parts to be stored as object keys.
+      art: '',      // Articulation of success conditions.
+      topics: []    // Key parts to be stored as object keys.
     }
   }
 
   // On keydown of atriculation.
-  articulation_onkeydown(event) {
-    if (event.key === 'Enter') this.setState({ topicnodes: this.state.topicnodes.concat({ subject: event.target.value, id: this.state.topicnodes.length}) });
+  art_onkeydown(e) {
+    if (e.key === 'Enter') this.setState({ topics: this.state.topics.concat(e.target.value) });
   }
 
   // On change of atriculation.
-  articulation_onchange(event) {
-    this.setState({ articulation: event.target.value })
+  art_onchange(e) {
+    this.setState({ art: e.target.value })
   }
 
   // Show articulation and all key parts.
@@ -28,11 +28,18 @@ class App extends Component {
       <div id="app">
         <h1 id="title">Thai's Introspective Problem-Solving</h1>
         <Articulation
-          sentence={this.state.articulation}
-          onkeydown={this.articulation_onkeydown.bind(this)}
-          onchange={this.articulation_onchange.bind(this)}
+          onchange={this.art_onchange.bind(this)}
+          onkeydown={this.art_onkeydown.bind(this)}
+          sentence={this.state.art}
         />
-        {this.state.topicnodes.map((topicObj, i) => <TopicNode topic={topicObj.subject} key={i} propkey={i}/>)}
+        {
+          this.state.topics.map((topic, i) => (
+            <Topic
+              key={topic}
+              topic={topic}
+            />
+          ))
+        }
       </div>
     )
   }

@@ -3,15 +3,23 @@ import Subsense from './subsense.jsx';
 
 const Definition = (props) => (
   <div className="definition">
-    <p><span className="definition_label">{props.defObj.definition ? 'Definition:' : ''}</span> {props.defObj.definition}</p>
+    <p>
+      <span className="definition_label">
+        {
+          !props.defObj.def
+            ? ''
+            : 'Definition: '
+        }
+      </span>
+      {props.defObj.def}
+    </p>
     {
-      !props.defObj.subsenses
+      !props.defObj.sub
         ? ''
-        : props.defObj.subsenses.map((sub, i) => (
+        : props.defObj.sub.map((sub, i) => (
           <Subsense
-            subsense={sub}
             key={`${props.propkey}-${i}`}
-            propkey={`${props.propkey}-${i}`}
+            subsense={sub}
           />
         ))
     }

@@ -10008,9 +10008,9 @@ const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.crea
     "div",
     { id: "rearticulate" },
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-      type: "text",
+      onChange: e => props.onchange(e),
       onKeyDown: e => props.onkeydown(e),
-      onChange: e => props.onchange(e)
+      type: "text"
     })
   )
 );
@@ -10018,60 +10018,7 @@ const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.crea
 /* harmony default export */ __webpack_exports__["a"] = (Articulation);
 
 /***/ }),
-/* 83 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__definition_jsx__ = __webpack_require__(184);
-
-
-
-
-class TopicNode extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
-  constructor(props) {
-    super(props);
-    this.state = {
-      topic: this.props.topic, // Key word or phrase to explore.
-      definitions: [], // Definitions of topic to explore.
-      children: [] // Children nodes to explore.
-    };
-  }
-
-  // Populate definitions of topic using Oxford API.
-  componentDidMount() {
-    const x = new XMLHttpRequest();
-    x.open('POST', '/define');
-    x.setRequestHeader("Content-type", "application/json");
-    x.onload = () => {
-      const response = JSON.parse(x.responseText);
-      if (response.error) this.setState({ topic: `${this.state.topic} - Error: ${response.error}` });else this.setState({ definitions: response });
-    };
-    x.send(JSON.stringify({ topic: this.state.topic }));
-  }
-
-  // Render node.
-  render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'div',
-      { className: 'node' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'p',
-        null,
-        this.state.topic
-      ),
-      this.state.definitions.map((defObj, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__definition_jsx__["a" /* default */], { defObj: defObj, key: `${this.props.propkey}-${i}`, propkey: `${this.props.propkey}-${i}` })),
-      this.state.children.map(topicnode => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(TopicNode, { key: `${this.props.id}-${this.children.length}` }))
-    );
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (TopicNode);
-
-/***/ }),
+/* 83 */,
 /* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -10082,7 +10029,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__articulation_jsx__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__topicnode_jsx__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__topic_jsx__ = __webpack_require__(186);
 
 
 
@@ -10092,19 +10039,19 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(props) {
     super(props);
     this.state = {
-      articulation: '', // Articulation of success conditions.
-      topicnodes: [] // Key parts to be stored as object keys.
+      art: '', // Articulation of success conditions.
+      topics: [] // Key parts to be stored as object keys.
     };
   }
 
   // On keydown of atriculation.
-  articulation_onkeydown(event) {
-    if (event.key === 'Enter') this.setState({ topicnodes: this.state.topicnodes.concat({ subject: event.target.value, id: this.state.topicnodes.length }) });
+  art_onkeydown(e) {
+    if (e.key === 'Enter') this.setState({ topics: this.state.topics.concat(e.target.value) });
   }
 
   // On change of atriculation.
-  articulation_onchange(event) {
-    this.setState({ articulation: event.target.value });
+  art_onchange(e) {
+    this.setState({ art: e.target.value });
   }
 
   // Show articulation and all key parts.
@@ -10118,11 +10065,14 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         'Thai\'s Introspective Problem-Solving'
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__articulation_jsx__["a" /* default */], {
-        sentence: this.state.articulation,
-        onkeydown: this.articulation_onkeydown.bind(this),
-        onchange: this.articulation_onchange.bind(this)
+        onchange: this.art_onchange.bind(this),
+        onkeydown: this.art_onkeydown.bind(this),
+        sentence: this.state.art
       }),
-      this.state.topicnodes.map((topicObj, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__topicnode_jsx__["a" /* default */], { topic: topicObj.subject, key: i, propkey: i }))
+      this.state.topics.map((topic, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__topic_jsx__["a" /* default */], {
+        key: topic,
+        topic: topic
+      }))
     );
   }
 }
@@ -22117,15 +22067,13 @@ const Definition = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.create
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'span',
       { className: 'definition_label' },
-      props.defObj.definition ? 'Definition:' : ''
+      !props.defObj.def ? '' : 'Definition: '
     ),
-    ' ',
-    props.defObj.definition
+    props.defObj.def
   ),
-  !props.defObj.subsenses ? '' : props.defObj.subsenses.map((sub, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__subsense_jsx__["a" /* default */], {
-    subsense: sub,
+  !props.defObj.sub ? '' : props.defObj.sub.map((sub, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__subsense_jsx__["a" /* default */], {
     key: `${props.propkey}-${i}`,
-    propkey: `${props.propkey}-${i}`
+    subsense: sub
   }))
 );
 
@@ -22149,14 +22097,74 @@ const Subsense = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createEl
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       "span",
       { className: "subsense_label" },
-      "Subsense:"
+      "Subsense: "
     ),
-    " ",
     props.subsense
   )
 );
 
 /* harmony default export */ __webpack_exports__["a"] = (Subsense);
+
+/***/ }),
+/* 186 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__definition_jsx__ = __webpack_require__(184);
+
+
+
+
+class Topic extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+  constructor(props) {
+    super(props);
+    this.state = {
+      topic: this.props.topic, // Key word or phrase.
+      defs: [], // Definitions of topic.
+      kids: [] // Children topics.
+    };
+  }
+
+  // Populate definitions of topic using Oxford API.
+  componentDidMount() {
+    const x = new XMLHttpRequest();
+    x.open('POST', '/define');
+    x.setRequestHeader("Content-type", "application/json");
+    x.onload = () => {
+      const response = JSON.parse(x.responseText);
+      if (response.error) this.setState({ topic: `${this.state.topic} - Error: ${response.error}` });else this.setState({ defs: response });
+    };
+    x.send(JSON.stringify({ topic: this.state.topic }));
+  }
+
+  // Render topic and children topics.
+  render() {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: 'topic' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'p',
+        null,
+        this.state.topic
+      ),
+      this.state.defs.map((defObj, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__definition_jsx__["a" /* default */], {
+        defObj: defObj,
+        key: `${this.state.topic}-Def-${i}`,
+        propkey: `${this.state.topic}-Def-${i}`
+      })),
+      this.state.kids.map((topic, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Topic, {
+        key: topic,
+        topic: topic
+      }))
+    );
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Topic);
 
 /***/ })
 /******/ ]);

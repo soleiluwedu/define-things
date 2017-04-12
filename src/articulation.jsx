@@ -7,9 +7,9 @@ const Articulation = (props) => (
     </div>
     <div id="rearticulate">
       <input
-        type="text"
-        onKeyDown={e => props.onkeydown(e)}
         onChange={e => props.onchange(e)}
+        onKeyDown={e => props.onkeydown(e)}
+        type="text"
       />
     </div>
   </div>
