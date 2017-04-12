@@ -20,7 +20,7 @@ body {
   justify-content: center;
 }
 
-#art_input {
+input {
   background-color: #001530;
   border: 1px solid lightskyblue;
   border-radius: 4px;

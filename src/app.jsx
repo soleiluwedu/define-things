@@ -14,7 +14,10 @@ class App extends Component {
 
   // On keydown of articulation.
   art_onkeydown(e) {
-    if (e.key === 'Enter') this.setState({ topics: this.state.topics.concat(e.target.value) });
+    if (e.key === 'Enter' && e.target.value) {
+      this.setState({ topics: this.state.topics.concat(e.target.value) });
+      e.target.value = '';
+    }
   }
 
   // On change of articulation.
