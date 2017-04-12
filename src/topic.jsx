@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Definition from './definition.jsx';
+import Sense from './sense.jsx';
 
 // Topic Component is a tree/node structure.
-// Contains topic, definition/subsenses, and children topics.
+// Contains topic, senses and children topics.
 class Topic extends Component {
   constructor(props) {
     super(props);
     this.state = {
       topic: this.props.topic,  // Key word or phrase.
-      defs: [],                 // Definitions of topic.
+      senses: [],                 // Senses of topic.
       kids: []                  // Children topics.
     }
   }
@@ -22,7 +22,7 @@ class Topic extends Component {
     x.onload = () => {
       const response = JSON.parse(x.responseText);
       if (response.error) this.setState({ topic: `${this.state.topic} - Error: ${response.error}` });
-      else this.setState({ defs: response });
+      else this.setState({ senses: response });
     }
     x.send(JSON.stringify({ topic: this.state.topic }));
   }
@@ -33,7 +33,7 @@ class Topic extends Component {
     return (
       <div className="topic">
         <p>{topic}</p>
-        {this.state.defs.map((d, i) => <Definition defObj={d} key={`${topic}-Def-${i}`} propkey={`${topic}-Def-${i}`} />)}
+        {this.state.senses.map((s, i) => <Sense sense={s} key={`${topic}-Sense-${i}`} propkey={`${topic}-Sense-${i}`} />)}
         {this.state.kids.map(t => <Topic key={t} topic={t} />)}
       </div>
     )

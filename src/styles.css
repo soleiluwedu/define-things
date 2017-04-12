@@ -35,15 +35,12 @@ input {
   width: 90%;
 }
 
-.def, .sub {
+.sense, .sub {
   background-color: black;
   border-radius: 4px;
+  color: steelblue;
   font-family: Arial;
   font-size: 12px;
-}
-
-.def {
-  color: steelblue
 }
 
 .def_label {
@@ -51,7 +48,6 @@ input {
 }
 
 .sub {
-  color: steelblue;
   padding-left: 40px;
 }
 

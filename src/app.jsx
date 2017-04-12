@@ -10,6 +10,13 @@ class App extends Component {
       art: '',      // Articulation of success conditions.
       topics: []    // Topics to explore.
     }
+    this.art_onchange = this.art_onchange.bind(this);
+    this.art_onkeydown = this.art_onkeydown.bind(this);
+  }
+
+  // On change of articulation.
+  art_onchange(e) {
+    this.setState({ art: e.target.value });
   }
 
   // On keydown of articulation.
@@ -20,17 +27,12 @@ class App extends Component {
     }
   }
 
-  // On change of articulation.
-  art_onchange(e) {
-    this.setState({ art: e.target.value })
-  }
-
   // Show articulation and all topics.
   render() {
     return (
       <div id="app">
         <h1 id="title">Define Things</h1>
-        <Articulation onchange={this.art_onchange.bind(this)} onkeydown={this.art_onkeydown.bind(this)} sentence={this.state.art} />
+        <Articulation onchange={this.art_onchange} onkeydown={this.art_onkeydown} sentence={this.state.art} />
         {this.state.topics.map(t => <Topic key={t} topic={t} />)}
       </div>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Subsense Component is presentational.
-// Shows subsenses of words.
+// Shows subsenses of word.
 const Subsense = (props) => (
   <div className="sub">
     <p><span className="sub_label">Subsense: </span>{props.subsense}</p>

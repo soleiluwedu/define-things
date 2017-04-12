@@ -10008,7 +10008,7 @@ const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.crea
   ),
   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     "div",
-    { id: "art_input" },
+    { id: "def_input" },
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { onChange: e => props.onchange(e), onKeyDown: e => props.onkeydown(e), type: "text" })
   )
 );
@@ -10040,6 +10040,13 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       art: '', // Articulation of success conditions.
       topics: [] // Topics to explore.
     };
+    this.art_onchange = this.art_onchange.bind(this);
+    this.art_onkeydown = this.art_onkeydown.bind(this);
+  }
+
+  // On change of articulation.
+  art_onchange(e) {
+    this.setState({ art: e.target.value });
   }
 
   // On keydown of articulation.
@@ -10048,11 +10055,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
       this.setState({ topics: this.state.topics.concat(e.target.value) });
       e.target.value = '';
     }
-  }
-
-  // On change of articulation.
-  art_onchange(e) {
-    this.setState({ art: e.target.value });
   }
 
   // Show articulation and all topics.
@@ -10065,7 +10067,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         { id: 'title' },
         'Define Things'
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__articulation_jsx__["a" /* default */], { onchange: this.art_onchange.bind(this), onkeydown: this.art_onkeydown.bind(this), sentence: this.state.art }),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__articulation_jsx__["a" /* default */], { onchange: this.art_onchange, onkeydown: this.art_onkeydown, sentence: this.state.art }),
       this.state.topics.map(t => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__topic_jsx__["a" /* default */], { key: t, topic: t }))
     );
   }
@@ -22042,37 +22044,7 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 184 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__subsense_jsx__ = __webpack_require__(185);
-
-
-
-// Definition Component is presentational.
-// Shows definitions and subsenses of words.
-const Definition = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-  'div',
-  { className: 'def' },
-  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'p',
-    null,
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'span',
-      { className: 'def_label' },
-      !props.defObj.def ? '' : 'Definition: '
-    ),
-    props.defObj.def
-  ),
-  !props.defObj.sub ? '' : props.defObj.sub.map((s, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__subsense_jsx__["a" /* default */], { key: `${props.propkey}-${i}`, subsense: s }))
-);
-
-/* harmony default export */ __webpack_exports__["a"] = (Definition);
-
-/***/ }),
+/* 184 */,
 /* 185 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -22082,7 +22054,7 @@ const Definition = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.create
 
 
 // Subsense Component is presentational.
-// Shows subsenses of words.
+// Shows subsenses of word.
 const Subsense = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   "div",
   { className: "sub" },
@@ -22109,19 +22081,19 @@ const Subsense = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createEl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__definition_jsx__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sense_jsx__ = __webpack_require__(187);
 
 
 
 
 // Topic Component is a tree/node structure.
-// Contains topic, definition/subsenses, and children topics.
+// Contains topic, senses and children topics.
 class Topic extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(props) {
     super(props);
     this.state = {
       topic: this.props.topic, // Key word or phrase.
-      defs: [], // Definitions of topic.
+      senses: [], // Senses of topic.
       kids: [] // Children topics.
     };
   }
@@ -22133,7 +22105,7 @@ class Topic extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     x.setRequestHeader("Content-type", "application/json");
     x.onload = () => {
       const response = JSON.parse(x.responseText);
-      if (response.error) this.setState({ topic: `${this.state.topic} - Error: ${response.error}` });else this.setState({ defs: response });
+      if (response.error) this.setState({ topic: `${this.state.topic} - Error: ${response.error}` });else this.setState({ senses: response });
     };
     x.send(JSON.stringify({ topic: this.state.topic }));
   }
@@ -22149,13 +22121,44 @@ class Topic extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         null,
         topic
       ),
-      this.state.defs.map((d, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__definition_jsx__["a" /* default */], { defObj: d, key: `${topic}-Def-${i}`, propkey: `${topic}-Def-${i}` })),
+      this.state.senses.map((s, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__sense_jsx__["a" /* default */], { sense: s, key: `${topic}-Sense-${i}`, propkey: `${topic}-Sense-${i}` })),
       this.state.kids.map(t => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Topic, { key: t, topic: t }))
     );
   }
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (Topic);
+
+/***/ }),
+/* 187 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__subsense_jsx__ = __webpack_require__(185);
+
+
+
+// Sense Component is presentational.
+// Shows definitions and subsenses of word.
+const Sense = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+  'div',
+  { className: 'sense' },
+  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'p',
+    null,
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'span',
+      { className: 'def_label' },
+      !props.sense.def ? '' : 'Definition: '
+    ),
+    props.sense.def
+  ),
+  !props.sense.sub ? '' : props.sense.sub.map((s, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__subsense_jsx__["a" /* default */], { key: `${props.propkey}-${i}`, subsense: s }))
+);
+
+/* harmony default export */ __webpack_exports__["a"] = (Sense);
 
 /***/ })
 /******/ ]);

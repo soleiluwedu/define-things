@@ -7,7 +7,7 @@ const Articulation = (props) => (
     <div id="sentence">
       <p>{props.sentence}</p>
     </div>
-    <div id="art_input">
+    <div id="def_input">
       <input onChange={e => props.onchange(e)} onKeyDown={e => props.onkeydown(e)} type="text" />
     </div>
   </div>
