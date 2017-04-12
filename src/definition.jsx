@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Subsense from './subsense.jsx';
 
+// Definition Component is presentational.
+// Shows definitions and subsenses of words.
 const Definition = (props) => (
   <div className="definition">
     <p>

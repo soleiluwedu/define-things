@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// Articulation Component is stateless.
+// Has input field to alter sentence.
 const Articulation = (props) => (
   <div id="articulation">
     <div id="sentence">

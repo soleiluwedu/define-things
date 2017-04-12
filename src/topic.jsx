@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Definition from './definition.jsx';
 
+// Topic Component is a tree/node structure.
+// Contains topic, definition/subsenses, and children topics.
 class Topic extends Component {
   constructor(props) {
     super(props);

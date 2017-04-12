@@ -9992,6 +9992,8 @@ module.exports = getIteratorFn;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
+// Articulation Component is stateless.
+// Has input field to alter sentence.
 const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   "div",
   { id: "articulation" },
@@ -10040,21 +10042,21 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     super(props);
     this.state = {
       art: '', // Articulation of success conditions.
-      topics: [] // Key parts to be stored as object keys.
+      topics: [] // Topics to explore.
     };
   }
 
-  // On keydown of atriculation.
+  // On keydown of articulation.
   art_onkeydown(e) {
     if (e.key === 'Enter') this.setState({ topics: this.state.topics.concat(e.target.value) });
   }
 
-  // On change of atriculation.
+  // On change of articulation.
   art_onchange(e) {
     this.setState({ art: e.target.value });
   }
 
-  // Show articulation and all key parts.
+  // Show articulation and all topics.
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -22058,6 +22060,8 @@ module.exports = traverseAllChildren;
 
 
 
+// Definition Component is presentational.
+// Shows definitions and subsenses of words.
 const Definition = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   'div',
   { className: 'definition' },
@@ -22088,6 +22092,8 @@ const Definition = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.create
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
+// Subsense Component is presentational.
+// Shows subsenses of words.
 const Subsense = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   "div",
   { className: "subsense" },
@@ -22119,6 +22125,8 @@ const Subsense = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createEl
 
 
 
+// Topic Component is a tree/node structure.
+// Contains topic, definition/subsenses, and children topics.
 class Topic extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(props) {
     super(props);

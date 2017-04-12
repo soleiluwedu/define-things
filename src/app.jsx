@@ -8,21 +8,21 @@ class App extends Component {
     super(props);
     this.state = {
       art: '',      // Articulation of success conditions.
-      topics: []    // Key parts to be stored as object keys.
+      topics: []    // Topics to explore.
     }
   }
 
-  // On keydown of atriculation.
+  // On keydown of articulation.
   art_onkeydown(e) {
     if (e.key === 'Enter') this.setState({ topics: this.state.topics.concat(e.target.value) });
   }
 
-  // On change of atriculation.
+  // On change of articulation.
   art_onchange(e) {
     this.setState({ art: e.target.value })
   }
 
-  // Show articulation and all key parts.
+  // Show articulation and all topics.
   render() {
     return (
       <div id="app">
