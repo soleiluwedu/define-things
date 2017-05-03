@@ -1,7 +1,7 @@
 {
-  "name": "introspective-problem-solving",
+  "name": "define-things",
   "version": "0.0.1",
-  "description": "An approach to problem solving, by Thai-Duong Nguyen",
+  "description": "Define Things, by Thai-Duong Nguyen",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/server.js",
@@ -9,24 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/soleiluwedu/introspective-problem-solving.git"
+    "url": "git+https://github.com/soleiluwedu/define-things.git"
   },
   "keywords": [
-    "introspective",
-    "problem",
-    "solving",
-    "algorithms",
-    "debugging",
-    "project",
-    "planning",
-    "structure"
+    "define",
+    "things"
   ],
   "author": "Thai-Duong Nguyen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/soleiluwedu/introspective-problem-solving/issues"
+    "url": "https://github.com/soleiluwedu/define-things/issues"
   },
-  "homepage": "https://github.com/soleiluwedu/introspective-problem-solving#readme",
+  "homepage": "https://github.com/soleiluwedu/define-things#readme",
   "dependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
