@@ -1,2 +1,2 @@
-# Introspective Problem-Solving
-An approach to problem solving, by Thai-Duong Nguyen
+# Define Things
+A CLI-style React SPA for defining things, by Thai-Duong Nguyen
