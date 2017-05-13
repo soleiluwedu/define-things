@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // Search Component keeps history of search terms.
 // Has input field to enter new search terms.
 const Search = (props) => (
-  <div id="art">
+  <div id="search">
     <div id="sentence">
       <p>{props.sentence}</p>
     </div>
