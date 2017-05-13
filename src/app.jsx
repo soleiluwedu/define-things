@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Articulation from './articulation.jsx';
-import Topic from './topic.jsx';
+import Search from './search.jsx';
+import Word from './word.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      art: '',      // Articulation of success conditions.
-      topics: []    // Topics to explore.
+      search: '',      // Search term.
+      words: []        // Words to define.
     }
-    this.art_onchange = this.art_onchange.bind(this);
-    this.art_onkeydown = this.art_onkeydown.bind(this);
+    this.search_onchange = this.search_onchange.bind(this);
+    this.search_onkeydown = this.search_onkeydown.bind(this);
   }
 
-  // On change of articulation.
-  art_onchange(e) {
-    this.setState({ art: e.target.value });
+  // On change of search term.
+  search_onchange(e) {
+    this.setState({ search: e.target.value });
   }
 
-  // On keydown of articulation.
-  art_onkeydown(e) {
+  // On keydown of search term.
+  search_onkeydown(e) {
     if (e.key === 'Enter' && e.target.value) {
-      this.setState({ topics: this.state.topics.concat(e.target.value) });
+      this.setState({ words: this.state.words.concat(e.target.value) });
       e.target.value = '';
     }
   }
 
-  // Show articulation and all topics.
+  // Show search term and all searched words.
   render() {
     return (
       <div id="app">
         <h1 id="title">Define Things</h1>
-        <Articulation onchange={this.art_onchange} onkeydown={this.art_onkeydown} sentence={this.state.art} />
-        {this.state.topics.map(t => <Topic key={t} topic={t} />)}
+        <Search onchange={this.search_onchange} onkeydown={this.search_onkeydown} sentence={this.state.search} />
+        {this.state.words.map(w => <Word key={w} word={w} />)}
       </div>
     )
   }

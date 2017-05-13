@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-// Articulation Component is stateless.
-// Has input field to alter sentence.
-const Articulation = (props) => (
+// Search Component keeps history of search terms.
+// Has input field to enter new search terms.
+const Search = (props) => (
   <div id="art">
     <div id="sentence">
       <p>{props.sentence}</p>
@@ -13,4 +13,4 @@ const Articulation = (props) => (
   </div>
 );
 
-export default Articulation;
+export default Search;

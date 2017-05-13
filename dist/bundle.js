@@ -9532,9 +9532,9 @@ module.exports = getIteratorFn;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
-// Articulation Component is stateless.
-// Has input field to alter sentence.
-const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+// Search Component keeps history of search terms.
+// Has input field to enter new search terms.
+const Search = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   "div",
   { id: "art" },
   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -9553,7 +9553,7 @@ const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.crea
   )
 );
 
-/* harmony default export */ __webpack_exports__["a"] = (Articulation);
+/* harmony default export */ __webpack_exports__["a"] = (Search);
 
 /***/ }),
 /* 83 */
@@ -9569,13 +9569,13 @@ const Articulation = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.crea
 
 
 
-// Topic Component is a tree/node structure.
-// Contains topic, senses and children topics.
-class Topic extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+// Word Component is a tree/node structure.
+// Contains word, senses and children topics.
+class Word extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(props) {
     super(props);
     this.state = {
-      topic: this.props.topic, // Key word or phrase.
+      word: this.props.word, // Key word or phrase.
       senses: [] };
   }
 
@@ -9586,28 +9586,28 @@ class Topic extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
     x.setRequestHeader("Content-type", "application/json");
     x.onload = () => {
       const response = JSON.parse(x.responseText);
-      if (response.error) this.setState({ topic: `${this.state.topic} - Error: ${response.error}` });else this.setState({ senses: response });
+      if (response.error) this.setState({ word: `${this.state.word} - Error: ${response.error}` });else this.setState({ senses: response });
     };
-    x.send(JSON.stringify({ topic: this.state.topic }));
+    x.send(JSON.stringify({ word: this.state.word }));
   }
 
-  // Render topic and children topics.
+  // Render word and senses.
   render() {
-    const topic = this.state.topic; // For the sake of brevity.
+    const word = this.state.word; // For the sake of brevity.
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       { className: 'topic' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'p',
         null,
-        topic
+        word
       ),
-      this.state.senses.map((s, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__sense_jsx__["a" /* default */], { sense: s, key: `${topic}-Sense-${i}`, propkey: `${topic}-Sense-${i}` }))
+      this.state.senses.map((s, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__sense_jsx__["a" /* default */], { sense: s, key: `${word}-Sense-${i}`, propkey: `${word}-Sense-${i}` }))
     );
   }
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (Topic);
+/* harmony default export */ __webpack_exports__["a"] = (Word);
 
 /***/ }),
 /* 84 */
@@ -9619,8 +9619,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__articulation_jsx__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__topic_jsx__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_jsx__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__word_jsx__ = __webpack_require__(83);
 
 
 
@@ -9630,27 +9630,27 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(props) {
     super(props);
     this.state = {
-      art: '', // Articulation of success conditions.
-      topics: [] // Topics to explore.
+      search: '', // Search term.
+      words: [] // Words to define.
     };
-    this.art_onchange = this.art_onchange.bind(this);
-    this.art_onkeydown = this.art_onkeydown.bind(this);
+    this.search_onchange = this.search_onchange.bind(this);
+    this.search_onkeydown = this.search_onkeydown.bind(this);
   }
 
-  // On change of articulation.
-  art_onchange(e) {
-    this.setState({ art: e.target.value });
+  // On change of search term.
+  search_onchange(e) {
+    this.setState({ search: e.target.value });
   }
 
-  // On keydown of articulation.
-  art_onkeydown(e) {
+  // On keydown of search term.
+  search_onkeydown(e) {
     if (e.key === 'Enter' && e.target.value) {
-      this.setState({ topics: this.state.topics.concat(e.target.value) });
+      this.setState({ words: this.state.words.concat(e.target.value) });
       e.target.value = '';
     }
   }
 
-  // Show articulation and all topics.
+  // Show search term and all searched words.
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -9660,8 +9660,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         { id: 'title' },
         'Define Things'
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__articulation_jsx__["a" /* default */], { onchange: this.art_onchange, onkeydown: this.art_onkeydown, sentence: this.state.art }),
-      this.state.topics.map(t => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__topic_jsx__["a" /* default */], { key: t, topic: t }))
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__search_jsx__["a" /* default */], { onchange: this.search_onchange, onkeydown: this.search_onkeydown, sentence: this.state.search }),
+      this.state.words.map(w => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__word_jsx__["a" /* default */], { key: w, word: w }))
     );
   }
 }

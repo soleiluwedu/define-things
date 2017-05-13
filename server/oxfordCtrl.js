@@ -12,7 +12,7 @@ function oxfordCtrl(req, res, next) {
   const reqOptions = {
     hostname: 'od-api.oxforddictionaries.com',
     port: 443,
-    path: '/api/v1/entries/en/' + req.body.topic + res.locals.oxford_param,
+    path: '/api/v1/entries/en/' + req.body.word + res.locals.oxford_param,
     method: 'GET',
     headers: {
       accept: "application/json",
