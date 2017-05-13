@@ -49,11 +49,10 @@ function oxfordCtrl(req, res, next) {
         // Navigating Oxford API's response object.
         const senses = fullData.results[0].lexicalEntries[0].entries[0].senses.map(obj => {
           const returnObj = {};
-          if (obj.definitions) returnObj.def = obj.definitions[0];
-          if (obj.subsenses) returnObj.sub = obj.subsenses.map(subObj => subObj.definitions[0]);
+          if (!!obj.definitions) returnObj.def = obj.definitions[0];
+          if (!!obj.subsenses) returnObj.sub = obj.subsenses.filter(s => !!s.definitions).map(s => s.definitions[0]);
           return returnObj;
         });
-
         // Sending senses.
         res.send(senses);
       }

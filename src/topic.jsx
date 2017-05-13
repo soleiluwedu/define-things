@@ -10,7 +10,6 @@ class Topic extends Component {
     this.state = {
       topic: this.props.topic,  // Key word or phrase.
       senses: [],                 // Senses of topic.
-      kids: []                  // Children topics.
     }
   }
 
@@ -34,7 +33,6 @@ class Topic extends Component {
       <div className="topic">
         <p>{topic}</p>
         {this.state.senses.map((s, i) => <Sense sense={s} key={`${topic}-Sense-${i}`} propkey={`${topic}-Sense-${i}`} />)}
-        {this.state.kids.map(t => <Topic key={t} topic={t} />)}
       </div>
     )
   }

@@ -5,6 +5,11 @@ body {
   background-color:black;
 }
 
+#app {
+  margin: auto;
+  width: 80%;
+}
+
 #title {
   text-align: center;
 }
@@ -16,6 +21,11 @@ body {
 
 #sentence {
   min-height: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+#def_input {
   display: flex;
   justify-content: center;
 }
@@ -35,9 +45,15 @@ input {
   width: 90%;
 }
 
+.topic {
+  padding-left: 8px;
+  border-left-color: lightsalmon;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-radius: 10px;
+}
+
 .sense, .sub {
-  background-color: black;
-  border-radius: 4px;
   color: steelblue;
   font-family: Arial;
   font-size: 12px;
