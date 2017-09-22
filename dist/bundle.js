@@ -9536,7 +9536,7 @@ module.exports = getIteratorFn;
 // Has input field to enter new search terms.
 const Search = props => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
   "div",
-  { id: "art" },
+  { id: "search" },
   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     "div",
     { id: "sentence" },
@@ -9629,26 +9629,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   constructor(props) {
     super(props);
+
+    this.search_onchange = e => {
+      this.setState({ search: e.target.value });
+    };
+
+    this.search_onkeydown = e => {
+      if (e.key === 'Enter' && e.target.value) {
+        this.setState({ words: this.state.words.concat(e.target.value) });
+        e.target.value = '';
+      }
+    };
+
     this.state = {
       search: '', // Search term.
       words: [] // Words to define.
     };
-    this.search_onchange = this.search_onchange.bind(this);
-    this.search_onkeydown = this.search_onkeydown.bind(this);
   }
 
   // On change of search term.
-  search_onchange(e) {
-    this.setState({ search: e.target.value });
-  }
+
 
   // On keydown of search term.
-  search_onkeydown(e) {
-    if (e.key === 'Enter' && e.target.value) {
-      this.setState({ words: this.state.words.concat(e.target.value) });
-      e.target.value = '';
-    }
-  }
+
 
   // Show search term and all searched words.
   render() {

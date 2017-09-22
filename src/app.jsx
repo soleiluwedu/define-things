@@ -10,17 +10,15 @@ class App extends Component {
       search: '',      // Search term.
       words: []        // Words to define.
     }
-    this.search_onchange = this.search_onchange.bind(this);
-    this.search_onkeydown = this.search_onkeydown.bind(this);
   }
 
   // On change of search term.
-  search_onchange(e) {
+  search_onchange = e => {
     this.setState({ search: e.target.value });
   }
 
   // On keydown of search term.
-  search_onkeydown(e) {
+  search_onkeydown = e => {
     if (e.key === 'Enter' && e.target.value) {
       this.setState({ words: this.state.words.concat(e.target.value) });
       e.target.value = '';
